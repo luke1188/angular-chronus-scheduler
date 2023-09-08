@@ -1,0 +1,7 @@
+{
+  "name": "chronus-demo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

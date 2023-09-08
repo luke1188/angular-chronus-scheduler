@@ -1,0 +1,33 @@
+
+.week-header{
+  color: #f3f3f3;
+  text-align: center;
+}
+.block {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.month-year-selector select,
+.month-year-selector input,
+.month-year-selector button {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  /* Add border styles as needed */
+  border-radius: 4px;
+  /* Add border-radius as needed */
+}
+
+.month-year-selector .block button {
+  background-color: #007aff;
+  /* Add your desired background color */
+  color: #fff;
+  /* Add your desired font color */
+  cursor: pointer;
+}
+
+ion-modal {
+  --height: auto;
+}

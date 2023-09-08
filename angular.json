@@ -3,5 +3,38 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "angular-chronus-scheduler": {
+      "projectType": "library",
+      "root": "projects/angular-chronus-scheduler",
+      "sourceRoot": "projects/angular-chronus-scheduler/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-chronus-scheduler/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-chronus-scheduler/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-chronus-scheduler/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/angular-chronus-scheduler/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
   }
 }

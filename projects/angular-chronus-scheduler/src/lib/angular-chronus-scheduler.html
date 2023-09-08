@@ -1,0 +1,75 @@
+<ion-modal trigger="select-month-year" [initialBreakpoint]="1" [breakpoints]="[0, 1]" class="month-year-selector">
+  <ng-template>
+    <div class="block">
+      <select [(ngModel)]="selectedMonth">
+        <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
+      </select>
+      <input type="number" [(ngModel)]="selectedYear" placeholder="Year" />
+      <ion-button (click)="changeMonth()">Go</ion-button>
+    </div>
+  </ng-template>
+</ion-modal>
+<ion-card class="scheduler">
+  <ion-card-content class="calendar">
+    <ion-segment class="view-buttons" [value]="currentView" mode="md">
+      <ion-segment-button value="day" (click)="switchView('day')">Day</ion-segment-button>
+      <ion-segment-button value="week" (click)="switchView('week')">Week</ion-segment-button>
+      <ion-segment-button value="month" (click)="switchView('month')">Month</ion-segment-button>
+    </ion-segment>
+    <br>
+
+    <!-- Month/Year Selector -->
+
+    <ion-button id="open-month-year" class="current-date" size="large" fill="clear" expand="block" mode="md" >{{ currentDate }}</ion-button>
+    <!-- <ion-datetime-button datetime="year-selector" class="month-year-selector"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true" >
+      <ng-template>
+        <ion-datetime id="year-selector" presentation="month-year" preferWheel="false" [showDefaultButtons]="true"  [cancelText]="'cancel'"
+      [doneText]="'setDate'"></ion-datetime>
+      </ng-template>
+    </ion-modal> -->
+    <ion-picker mode="md" trigger="open-month-year" [columns]="monthYears" ></ion-picker>
+
+
+    <!-- Month View -->
+    <ion-grid *ngIf="currentView === 'month'" class="month-view">
+      <ion-row >
+        <ion-col *ngFor="let day of weekDays" class="month-day-header" size="1.7">
+          <h2 class="week-header"><b>{{ day }}</b></h2>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let week of weeks">
+        <ion-col *ngFor="let day of week" size="1.7">
+          <ion-button mode="md" (click)="onDateClick(day)" expand="block" fill="clear" class="day" size="large" shape="round">
+            {{ formatDate(day) }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Week View -->
+    <ion-grid *ngIf="currentView === 'week'" class="week-view">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col *ngFor="let day of weekDays" class="month-day-header">
+          {{ day }}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let timeSlot of timeSlots">
+        <ion-item class="time-slot">
+        {{timeSlot}} {{isCurrentTimeSlot(timeSlot)}}
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+
+
+    <!-- Day View -->
+    <div *ngIf="currentView === 'day'" class="day-view-container">
+      <div class="day">
+        {{ formatDay(schedule[0]) }}
+        <!-- Add day view content here -->
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>
+<div>{{currentTime}}</div>
