@@ -1,17 +1,25 @@
-<ion-modal trigger="select-month-year" [initialBreakpoint]="1" [breakpoints]="[0, 1]" class="month-year-selector">
-  <ng-template>
-    <div class="block">
-      <select [(ngModel)]="selectedMonth">
-        <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
-      </select>
-      <input type="number" [(ngModel)]="selectedYear" placeholder="Year" />
-      <ion-button (click)="changeMonth()">Go</ion-button>
-    </div>
-  </ng-template>
-</ion-modal>
+
 <ion-card class="scheduler">
   <ion-card-content class="calendar">
 
+    <ion-grid>
+    <ion-row>
+      <ion-col offsetLg="0" offset-xs="-1" sizeLg="10" size="4">
+        <ion-button id="open-month-year" class="current-date" size="large" fill="clear" mode="md">{{ currentDate
+          }}</ion-button>
+      </ion-col>
+      <ion-col offsetLg="0" offset-xs="5" sizeLg="1" size="2">
+        <ion-button fill="clear" >
+          <ion-icon slot="icon-only" name="layers"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col sizeLg="1" size="2">
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
     <ion-segment class="view-buttons" [value]="currentView" mode="md">
       <ion-segment-button value="day" (click)="switchView('day')">Day</ion-segment-button>
       <ion-segment-button value="week" (click)="switchView('week')">Week</ion-segment-button>
@@ -20,15 +28,6 @@
     <br>
 
     <!-- Month/Year Selector -->
-
-    <ion-button id="open-month-year" class="current-date" size="large" fill="clear" expand="block" mode="md" >{{ currentDate }}</ion-button>
-    <!-- <ion-datetime-button datetime="year-selector" class="month-year-selector"></ion-datetime-button>
-    <ion-modal [keepContentsMounted]="true" >
-      <ng-template>
-        <ion-datetime id="year-selector" presentation="month-year" preferWheel="false" [showDefaultButtons]="true"  [cancelText]="'cancel'"
-      [doneText]="'setDate'"></ion-datetime>
-      </ng-template>
-    </ion-modal> -->
     <ion-picker class="date-picker" mode="md" trigger="open-month-year" [columns]="monthYears" (ionPickerDidDismiss)="handlePickerDismiss()" ></ion-picker>
 
 
