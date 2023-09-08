@@ -1,27 +1,83 @@
 # Chronus
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+This repository contains two projects:
 
-## Development server
+- [Angular Chronus Scheduler Library](projects/angular-chronus-scheduler): A custom Angular library for scheduling.
+- [Chronus Demo Site](chronus-demo): An Ionic Angular project demonstrating the usage of the Angular Chronus Scheduler Library.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Angular Chronus Scheduler Library
 
-## Code scaffolding
+The Angular Chronus Scheduler is a custom Angular library that provides scheduling functionality. It includes features for managing schedules on a daily, weekly, and monthly basis.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Usage
+
+To use the Angular Chronus Scheduler in your project, follow these steps:
+
+1. Install the library using npm:
+
+   ```bash
+   npm install angular-chronus-scheduler
+   ```
+
+2. Import the module in your application:
+
+   ```typescript
+   import { AngularChronusSchedulerModule } from 'angular-chronus-scheduler';
+
+   @NgModule({
+     imports: [AngularChronusSchedulerModule],
+     // ...
+   })
+   export class YourModule { }
+   ```
+
+3. Use the `chronus-scheduler` component in your templates:
+
+   ```html
+   <chronus-scheduler></chronus-scheduler>
+   ```
+
+## Chronus Demo Site
+
+The Chronus Demo Site is an Ionic Angular project that showcases the usage of the Angular Chronus Scheduler Library. It provides examples and demonstrations of various scheduling scenarios.
+
+### Development Server
+
+To run the demo site locally, follow these steps:
+
+1. Navigate to the `chronus-demo` directory:
+
+   ```bash
+   cd chronus-demo
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   ionic serve
+   ```
+
+The application will automatically reload if you change any of the source files.
+
+## Development
+
+- For library development, refer to the [Angular Chronus Scheduler Library documentation](projects/angular-chronus-scheduler/README.md).
+- For demo site development, refer to the [Chronus Demo Site documentation](chronus-demo/README.md).
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- To build the library, run `ng build angular-chronus-scheduler`.
+- To build the demo site, run `ionic build` within the `chronus-demo` directory.
 
-## Running unit tests
+## Running Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Unit tests for the library can be executed via Karma by running `ng test angular-chronus-scheduler`.
+- End-to-end tests for the demo site can be executed using Protractor.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For additional help, refer to the respective documentation for each project.

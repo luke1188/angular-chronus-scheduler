@@ -1,24 +1,31 @@
-# AngularChronusScheduler
+# Angular Chronus Scheduler Library
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+The Angular Chronus Scheduler is a custom Angular library that provides scheduling functionality. It includes features for managing schedules on a daily, weekly, and monthly basis.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project angular-chronus-scheduler` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-chronus-scheduler`.
-> Note: Don't forget to add `--project angular-chronus-scheduler` or else it will be added to the default project in your `angular.json` file. 
+To use the Angular Chronus Scheduler in your project, follow these steps:
 
-## Build
+1. Install the library using npm:
 
-Run `ng build angular-chronus-scheduler` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install angular-chronus-scheduler
+```
 
-## Publishing
+2. Import the module in your application:
 
-After building your library with `ng build angular-chronus-scheduler`, go to the dist folder `cd dist/angular-chronus-scheduler` and run `npm publish`.
+```typescript
+import { AngularChronusSchedulerModule } from 'angular-chronus-scheduler';
 
-## Running unit tests
+@NgModule({
+  imports: [AngularChronusSchedulerModule],
+  // ...
+})
+export class YourModule { }
+```
 
-Run `ng test angular-chronus-scheduler` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Use the `chronus-scheduler` component in your templates:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```html
+<chronus-scheduler></chronus-scheduler>
+```
