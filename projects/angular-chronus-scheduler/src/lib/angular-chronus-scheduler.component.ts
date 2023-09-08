@@ -14,6 +14,7 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
   // Holds the formatted current date
   currentDate: string = '';
 
+
   // Holds the current time
   currentTime: Date = new Date();
 
@@ -50,26 +51,14 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  // List of years for dropdown
-  years: number[] = Array.from({length: 10}, (_, i) => new Date().getFullYear() + i);
+  // Generate an array of years including 5 years before and after the current year
+  years: number[] = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i);
 
-  // Dropdown options for month and year
-  public monthYears = [
-    {
-      name: 'years',
-      options: this.years.map(year => ({
-          text: year.toString(),
-          value: year
-        }))
-    },
-    {
-      name: 'months',
-      options: this.months.map((month, index) => ({
-          text: month,
-          value: index
-        }))
-    },
-  ];
+  public monthYears: {
+  name: string,
+  options: { text: string, value: number }[],
+  selectedIndex: number
+  }[] = [];
 
   // Reference to an element in the template
   @ViewChild('weekViewContainer') weekViewContainer!: ElementRef;
@@ -85,6 +74,33 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Initialize with the current date
     this.currentDate = this.formatDay(new Date());
+
+    //current year and month
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+
+    // index of the current month
+    const currentMonthIndex = this.months.findIndex(month => month === this.months[currentMonth]);
+
+     // Dropdown options for month and year
+    this.monthYears = [
+    {
+      name: 'years',
+      options: this.years.map(year => ({
+          text: year.toString(),
+          value: year,
+        })),
+        selectedIndex: 5,
+    },
+    {
+      name: 'months',
+      options: this.months.map((month, index) => ({
+          text: month,
+          value: index,
+        })),
+        selectedIndex: currentMonthIndex
+    },
+  ];
 
     // Generate initial schedule
     this.generateSchedule();
