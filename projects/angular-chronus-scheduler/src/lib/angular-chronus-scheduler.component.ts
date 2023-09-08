@@ -56,8 +56,9 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
 
   public monthYears: {
   name: string,
-  options: { text: string, value: number }[],
-  selectedIndex: number
+  options: { text: string, value: number, }[],
+  selectedIndex: number,
+
   }[] = [];
 
   // Reference to an element in the template
@@ -97,8 +98,9 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
       options: this.months.map((month, index) => ({
           text: month,
           value: index,
+          cssClass: "picker-month"
         })),
-        selectedIndex: currentMonthIndex
+        selectedIndex: currentMonthIndex,
     },
   ];
 
@@ -213,5 +215,16 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
   onDateClick(date: Date) {
     const formattedDate = this.formatDay(date);
     alert(`You clicked on ${formattedDate}`);
+  }
+
+   handlePickerDismiss() {
+    // const selectedDate = event.data.years.value
+
+    // console.log('Selected Date:', selectedDate);
+    this.selectedMonth = this.monthYears[1].selectedIndex ;
+    this.selectedYear = this.monthYears[0].options[this.monthYears[0].selectedIndex].value;
+    this.generateSchedule();
+    console.log('Selected Month:', this.monthYears[1].selectedIndex +1);
+    console.log('Selected Years:', this.monthYears[0].options[this.monthYears[0].selectedIndex].value);
   }
 }

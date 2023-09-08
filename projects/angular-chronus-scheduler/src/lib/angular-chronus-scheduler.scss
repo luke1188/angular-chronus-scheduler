@@ -7,6 +7,12 @@
 
 
 //todo: make these values vars for use in root
-::ng-deep.picker-opt-selected {
-  color: green !important;
+::ng-deep .picker-opt {
+  // color: green !important;
+
+  opacity: 0.4;
+
+  &.picker-opt-selected {
+    opacity: 1 !important;
+  }
 }

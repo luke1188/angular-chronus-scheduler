@@ -11,6 +11,7 @@
 </ion-modal>
 <ion-card class="scheduler">
   <ion-card-content class="calendar">
+
     <ion-segment class="view-buttons" [value]="currentView" mode="md">
       <ion-segment-button value="day" (click)="switchView('day')">Day</ion-segment-button>
       <ion-segment-button value="week" (click)="switchView('week')">Week</ion-segment-button>
@@ -28,7 +29,7 @@
       [doneText]="'setDate'"></ion-datetime>
       </ng-template>
     </ion-modal> -->
-    <ion-picker class="date-picker" mode="md" trigger="open-month-year" [columns]="monthYears" ></ion-picker>
+    <ion-picker class="date-picker" mode="md" trigger="open-month-year" [columns]="monthYears" (ionPickerDidDismiss)="handlePickerDismiss()" ></ion-picker>
 
 
     <!-- Month View -->
@@ -39,8 +40,8 @@
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let week of weeks">
-        <ion-col *ngFor="let day of week" size="1.7">
-          <ion-button mode="md" (click)="onDateClick(day)" expand="block" fill="clear" class="day" size="large" shape="round">
+        <ion-col *ngFor="let day of week" size="1.7" >
+          <ion-button mode="md" (click)="onDateClick(day)" expand="full"  fill="clear" class="day" size="large" shape="round">
             {{ formatDate(day) }}
           </ion-button>
         </ion-col>
@@ -70,6 +71,13 @@
         <!-- Add day view content here -->
       </div>
     </div>
+    <br>
+      <ion-footer>
+        <ion-button (click)="switchView('day')" fill="clear">
+         Today
+        </ion-button>
+      </ion-footer>
+
   </ion-card-content>
 </ion-card>
 <div>{{currentTime}}</div>
