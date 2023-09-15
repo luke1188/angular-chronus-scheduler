@@ -4,7 +4,7 @@
 
     <ion-grid>
     <ion-row>
-      <ion-col offsetLg="0" offset-xs="-1" sizeLg="10" size="4">
+      <ion-col offsetLg="0" offset-xs="-1" sizeLg="10" size="4" >
         <ion-button id="open-month-year" class="current-date" size="large" fill="clear" mode="md">{{ currentDate
           }}</ion-button>
       </ion-col>
@@ -14,7 +14,7 @@
         </ion-button>
       </ion-col>
       <ion-col sizeLg="1" size="2">
-        <ion-button fill="clear">
+        <ion-button fill="clear" id="{{AddEventTriggerID}}">
           <ion-icon slot="icon-only" name="add"></ion-icon>
         </ion-button>
       </ion-col>
@@ -23,7 +23,7 @@
     <ion-segment class="view-buttons" [value]="currentView" mode="md">
       <ion-segment-button value="day" (click)="switchView('day')">Day</ion-segment-button>
       <ion-segment-button value="week" (click)="switchView('week')">Week</ion-segment-button>
-      <ion-segment-button value="month" (click)="switchView('month')">Month</ion-segment-button>
+      <ion-segment-button value="month" (click)="switchView('month')" >Month</ion-segment-button>
     </ion-segment>
     <br>
 
@@ -40,9 +40,12 @@
       </ion-row>
       <ion-row *ngFor="let week of weeks">
         <ion-col *ngFor="let day of week" size="1.7" >
+          <div>
           <ion-button mode="md" (click)="onDateClick(day)" expand="full"  fill="clear" class="day" size="large" shape="round">
-            {{ formatDate(day) }}
+            <span class="day-icon">{{ formatDate(day) }}</span>
           </ion-button>
+          <ion-icon *ngIf="hasEvent(day)" class="event-indicator" name="ellipse" [style.color]="getEventColor(day)"></ion-icon>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -76,7 +79,14 @@
          Today
         </ion-button>
       </ion-footer>
-
+      <div *ngFor="let event of scheduledEvents">
+        <h1> From parent : </h1>
+        <p>Title: {{ event.title }}</p>
+        <p>Start Time: {{ event.starts }}</p>
+      </div>
   </ion-card-content>
 </ion-card>
 <div>{{currentTime}}</div>
+
+
+

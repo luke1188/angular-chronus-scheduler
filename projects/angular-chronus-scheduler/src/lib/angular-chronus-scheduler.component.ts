@@ -1,5 +1,5 @@
 // Import necessary modules and components
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { format, addDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, getDay, subDays } from 'date-fns';
 
 // Define the component
@@ -9,6 +9,11 @@ import { format, addDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, getD
   styleUrls: ['angular-chronus-scheduler.scss'],
 })
 export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
+
+  @Output() selectedEvent: EventEmitter<String> = new EventEmitter<String>();
+  @Input() AddEventTriggerID : String = "";
+  @Input() scheduledEvents : any[] = [];
+
   // Properties
 
   // Holds the formatted current date
@@ -214,8 +219,21 @@ export class AngularChronusSchedulerComponent implements OnInit, AfterViewInit {
   // Handles the click event on a date
   onDateClick(date: Date) {
     const formattedDate = this.formatDay(date);
-    alert(`You clicked on ${formattedDate}`);
+    this.selectedEvent.emit(formattedDate);
   }
+
+  hasEvent(date: Date): boolean {
+    const formattedDate = this.formatDay(date);
+    return this.scheduledEvents.some(event => event.starts === formattedDate); // Assuming events have a 'date' property
+  }
+  getEventColor(date: Date): string | undefined {
+  const event = this.scheduledEvents.find(event => {
+    const eventDate = new Date(event.starts);
+    return eventDate.toDateString() === date.toDateString();
+  });
+
+  return event ? event.color : undefined;
+}
 
    handlePickerDismiss() {
     // const selectedDate = event.data.years.value

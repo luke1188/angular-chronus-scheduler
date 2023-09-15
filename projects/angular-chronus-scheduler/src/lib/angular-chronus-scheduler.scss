@@ -4,7 +4,28 @@
   text-align: center;
 }
 
+.day{
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
+.day-icon{
+  font-size: medium;
+  top: 0;
+  color: white;
+  z-index: 5;
+
+}
+
+.event-indicator{
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 //todo: make these values vars for use in root
 ::ng-deep .picker-opt {

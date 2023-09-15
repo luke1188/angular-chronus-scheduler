@@ -2,5 +2,51 @@
 <ion-content [fullscreen]="true">
 
     <h1 class="ion-text-center" style="color: var(--ion-color-primary);">Chronus Demo</h1>
-  <chronus-scheduler></chronus-scheduler>
+  <chronus-scheduler [scheduledEvents]= "events" AddEventTriggerID="addEventBtn" (selectedEvent) = "handleSelectedEvent($event)"></chronus-scheduler>
+  <div *ngFor="let event of events">
+    <p>Title: {{ event.title }}</p>
+    <p>Start Time: {{ event.starts }}</p>
+  </div>
 </ion-content>
+<ion-modal trigger="addEventBtn">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Add an Event</ion-title>
+        <ion-buttons slot="end">
+          <ion-button [strong]="true" (click)="addEvent()">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-input [(ngModel)]="myTitle" type="text" placeholder="My event" label="Title"></ion-input>
+      <ion-input [(ngModel)]="location" type="text" placeholder="Location or Video Call" label="Location or Video Call"></ion-input>
+      <ion-toggle  [(ngModel)]="allDay"> All daby</ion-toggle>
+      <ion-input [(ngModel)]="starts" type="text" placeholder="00:00 4/20/23" label="Starts"></ion-input>
+      <ion-input [(ngModel)]="ends" type="text" placeholder="00:30 4/20/23" label="Ends"></ion-input>
+      <ion-input [(ngModel)]="travelTime" type="text" placeholder="None" label="Travel Time"></ion-input>
+      <ion-input [(ngModel)]="repeats" type="text" placeholder="None" label="Repeats"></ion-input>
+      <ion-row class="color-picker">
+        <h3> Event Color : </h3>
+
+        <ion-item color="none" lines="none">
+          <ion-icon name="ellipse" [style.color]="color"></ion-icon>
+        </ion-item>
+        <ion-item color="none">
+
+        <ion-button mode="md" fill="clear" (click)="selectColor('red')"><ion-icon name="ellipse"
+            [style.color]="'red'"></ion-icon></ion-button>
+        <ion-button mode="md" fill="clear" (click)="selectColor('blue')"><ion-icon name="ellipse"
+            [style.color]="'blue'"></ion-icon></ion-button>
+        <ion-button mode="md" fill="clear" (click)="selectColor('green')"><ion-icon name="ellipse"
+            [style.color]="'green'"></ion-icon></ion-button>
+        <!-- Add more color buttons as needed -->
+        </ion-item>
+      </ion-row>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>
